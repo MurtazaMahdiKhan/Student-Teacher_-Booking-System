@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="user-info">
+                <h3 id="userName">Teacher Name</h3>
+                <p>Teacher</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="appointments.html">Appointments</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div class="stats-section">
+                <div class="stat-card">
+                    <h3>Pending Appointments</h3>
+                    <p id="pendingCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Today's Appointments</h3>
+                    <p id="todayCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Students</h3>
+                    <p id="studentCount">0</p>
+                </div>
+            </div>
+            <div class="appointments-section">
+                <h2>Upcoming Appointments</h2>
+                <div id="upcomingAppointments">
+                    <!-- Appointments will be dynamically loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="../../assets/js/teacher/dashboard.js"></script>
+</body>
+</html>

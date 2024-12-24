@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="user-info">
+                <h3 id="userName">Student Name</h3>
+                <p>Student</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="appointments.html">My Appointments</a></li>
+                <li><a href="messages.html">Messages</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            <div class="search-section">
+                <h2>Find Teachers</h2>
+                <div class="search-box">
+                    <input type="text" id="teacherSearch" placeholder="Search by name, department, or subject">
+                    <button class="btn primary">Search</button>
+                </div>
+            </div>
+            <div class="teachers-list" id="teachersList">
+                <!-- Teachers will be dynamically loaded here -->
+            </div>
+        </main>
+    </div>
+    <script type="module" src="../../assets/js/student/dashboard.js"></script>
+</body>
+</html>

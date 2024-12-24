@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <!-- Same sidebar as dashboard -->
+        </nav>
+        <main class="main-content">
+            <h2>Profile Settings</h2>
+            <form id="profileForm" class="profile-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department</label>
+                    <input type="text" id="department" required>
+                </div>
+                <div class="form-group">
+                    <label for="subjects">Subjects</label>
+                    <input type="text" id="subjects" required>
+                </div>
+                <div class="form-group">
+                    <label for="availability">Availability</label>
+                    <div id="availabilitySchedule" class="schedule-grid">
+                        <!-- Availability schedule will be rendered here -->
+                    </div>
+                </div>
+                <button type="submit" class="btn primary">Save Changes</button>
+            </form>
+        </main>
+    </div>
+    <script type="module" src="../../assets/js/teacher/profile.js"></script>
+</body>
+</html>

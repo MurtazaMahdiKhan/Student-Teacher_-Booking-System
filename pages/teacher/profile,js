@@ -1,0 +1,87 @@
+import { db, COLLECTIONS } from '../../database.js';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { auth } from '../../database.js';
+import { logger } from '../../logger.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const profileForm = document.getElementById('profileForm');
+    const nameInput = document.getElementById('name');
+    const departmentInput = document.getElementById('department');
+    const subjectsInput = document.getElementById('subjects');
+    const availabilitySchedule = document.getElementById('availabilitySchedule');
+
+    async function loadProfile() {
+        try {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const userDoc = await getDoc(doc(db, COLLECTIONS.USERS, user.uid));
+            const userData = userDoc.data();
+
+            nameInput.value = userData.name;
+            departmentInput.value = userData.department;
+            subjectsInput.value = userData.subjects.join(', ');
+            renderAvailabilitySchedule(userData.availability || {});
+        } catch (error) {
+            logger.log('error', `Error loading profile: ${error.message}`);
+            alert('Error loading profile');
+        }
+    }
+
+    function renderAvailabilitySchedule(availability) {
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+        const times = ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'];
+
+        availabilitySchedule.innerHTML = `
+            <div class="schedule-header">
+                <div></div>
+                ${times.map(time => `<div>${time}</div>`).join('')}
+            </div>
+            ${days.map(day => `
+                <div class="schedule-row">
+                    <div>${day}</div>
+                    ${times.map(time => `
+                        <div>
+                            <input type="checkbox" 
+                                   name="availability" 
+                                   value="${day}-${time}"
+                                   ${availability[`${day}-${time}`] ? 'checked' : ''}>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('')}
+        `;
+    }
+
+    profileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        try {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const availability = {};
+            const checkboxes = document.querySelectorAll('input[name="availability"]');
+            checkboxes.forEach(checkbox => {
+                availability[checkbox.value] = checkbox.checked;
+            });
+
+            await updateDoc(doc(db, COLLECTIONS.USERS, user.uid), {
+                name: nameInput.value,
+                department: departmentInput.value,
+                subjects: subjectsInput.value.split(',').map(s => s.trim()),
+                availability: availability,
+                updatedAt: serverTimestamp()
+            });
+
+            logger.log('info', 'Profile updated successfully');
+            alert('Profile updated successfully');
+        } catch (error) {
+            logger.log('error', `Error updating profile: ${error.message}`);
+            alert('Error updating profile');
+        }
+    });
+
+    // Initial load
+    loadProfile();
+});
