@@ -6,7 +6,7 @@ import { logger } from './logger.js'; // Ensure the logger module is robust
 
 // Firebase configuration (consider moving to environment variables for security)
 const firebaseConfig = {
-    apiKey: "AIzaSyAXo64u4uetICsvp-Nml6mcXWsp8OeV8qA",
+    apiKey: "NA",
     authDomain: "bookingappointment-60eba.firebaseapp.com",
     projectId: "bookingappointment-60eba",
     storageBucket: "bookingappointment-60eba.firebasestorage.app",
